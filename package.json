@@ -1,5 +1,5 @@
 {
-  "name": "iqos-scan-api",
+  "name": "nfc-api",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
