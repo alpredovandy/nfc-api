@@ -17,8 +17,6 @@ nfc.on("reader", (reader) => {
 
   reader.aid = "F222222222";
 
-  // lastReader = reader;
-
   reader.on("card", (card: Card) => {
     console.log(`${reader.name} card detected`, card);
     lastScannedCard = card;
@@ -56,20 +54,17 @@ async function authenticateAndWrite(
   data: string
 ) {
   try {
-    // Authenticate the block using the type A key and a predefined key value.
     await reader.authenticate(block, KEY_TYPE_A, "FFFFFFFFFFFF");
 
-    // Prepare the data to be written. We're using a 16-byte buffer and filling it with our data.
     const bufferData = Buffer.allocUnsafe(16);
-    bufferData.fill(0); // Initialize the buffer with zeros.
+    bufferData.fill(0);
 
-    bufferData.write(data); // Write our data string to the buffer.
+    bufferData.write(data);
 
-    // Write the buffer data to the specified block on the card.
     await reader.write(block, bufferData, 16);
   } catch (error) {
     console.log(`Error writing to block ${block}`, error);
-    throw error; // Rethrow the error so that it can be caught and handled by an outer scope, if necessary.
+    throw error;
   }
 }
 
