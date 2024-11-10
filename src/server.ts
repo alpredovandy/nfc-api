@@ -49,7 +49,7 @@ app.use(express.json());
 app.use(express.static(path.resolve(__dirname, "dist")));
 
 app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "index.html"), (err) => {
+  res.sendFile(path.resolve(__dirname, "../public", "index.html"), (err) => {
     if (err) {
       res.status(404).send(err);
     } else {
