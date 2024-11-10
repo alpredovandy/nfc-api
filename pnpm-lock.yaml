@@ -1316,11 +1316,6 @@ snapshots:
 
   path-to-regexp@0.1.10: {}
 
-  pcsclite@1.0.1:
-    dependencies:
-      bindings: 1.5.0
-      nan: 2.22.0
-
   picomatch@2.3.1: {}
 
   proxy-addr@2.0.7:
