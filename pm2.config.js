@@ -1,7 +1,7 @@
 module.exports = {
   apps: {
     name: "iqos-rfid-api",
-    script: "pnpm dev",
+    script: "pnpm start",
     instances: 1,
     exec_mode: "fork",
     watch: false,
