@@ -46,12 +46,12 @@ app.use(
 
 app.use(express.json());
 
-// Serve static files from the "public" directory
+// Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, "../public")));
 
-// Define a basic route
+// Route to serve the main entry point (optional)
 app.get("/", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../public/index.html"));
+  res.sendFile(path.join(__dirname, "../public", "index.html"));
 });
 
 app.get("/api/v1/scan-card", (req: Request, res: Response) => {
