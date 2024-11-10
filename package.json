@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "compile": "rimraf ./dist/ && tsc",
+    "compile": "rm -rf ./dist/ && tsc",
     "copy": "copyfiles -u 1 ./public/index.html ./dist",
     "build": "tsc",
     "start": "pnpm run compile && pnpm run copy && node dist/server.js",
@@ -22,8 +22,7 @@
     "@tockawa/nfc-pcsc": "^0.9.3",
     "copyfiles": "^2.4.1",
     "cors": "^2.8.5",
-    "express": "^4.21.1",
-    "rimraf": "^6.0.1"
+    "express": "^4.21.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
