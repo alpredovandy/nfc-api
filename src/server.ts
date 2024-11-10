@@ -1,16 +1,14 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import cors from "cors";
-import PCSC, { Card, KEYS, Reader } from "@tockawa/nfc-pcsc";
+import path from "path";
+import PCSC, { Card } from "@tockawa/nfc-pcsc";
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 let lastScannedCard: any = null;
-// let lastReader: any = null;
 
 const nfc = new PCSC();
-
-const { KEY_TYPE_A } = KEYS;
 
 nfc.on("reader", (reader) => {
   console.log(`${reader.name} device attached`);
@@ -48,27 +46,9 @@ app.use(
 
 app.use(express.json());
 
-async function authenticateAndWrite(
-  reader: Reader,
-  block: number,
-  data: string
-) {
-  try {
-    await reader.authenticate(block, KEY_TYPE_A, "FFFFFFFFFFFF");
+app.use(express.static(path.join(__dirname, "../public")));
 
-    const bufferData = Buffer.allocUnsafe(16);
-    bufferData.fill(0);
-
-    bufferData.write(data);
-
-    await reader.write(block, bufferData, 16);
-  } catch (error) {
-    console.log(`Error writing to block ${block}`, error);
-    throw error;
-  }
-}
-
-app.get("/api/v1/scan-card", (req: any, res: any) => {
+app.get("/api/v1/scan-card", (req: Request, res: Response) => {
   if (lastScannedCard) {
     res.send({ status: "success", data: lastScannedCard });
   } else {
@@ -76,31 +56,6 @@ app.get("/api/v1/scan-card", (req: any, res: any) => {
   }
 });
 
-// app.put("/api/v1/update-card", async (req, res) => {
-//   try {
-//     const payload = req.body;
-//     // Event listener for detecting when a card is in proximity to the reader.
-//     lastReader.on("card", async () => {
-//       try {
-//         // Authenticate and write specific data to several blocks on the card.
-//         await authenticateAndWrite(lastReader, 5, "123456789123456");
-
-//         lastReader.close(); // Close the reader after completing the write operations.
-//         console.log("Write success"); // Log a message to indicate a successful write operation.
-//       } catch (error) {
-//         console.log("Write error", error); // Log any error that might occur during the write process.
-//       }
-
-//       // Event listener for handling errors that are specific to the reader.
-//     });
-
-//     // Global event listener to catch any other NFC-related errors.
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ error: "Internal server error" });
-//   }
-// });
-
 app.listen(port, () => {
-  console.log(`Server is running`);
+  console.log(`Server is running...`);
 });
