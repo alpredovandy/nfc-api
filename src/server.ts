@@ -1,19 +1,11 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
-import path from "path";
 import PCSC, { Card } from "@tockawa/nfc-pcsc";
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 let lastScannedCard: any = null;
-
-const corsOptions = {
-  origin: "*",
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true,
-  optionsSuccessStatus: 204,
-};
 
 const nfc = new PCSC();
 
@@ -44,23 +36,26 @@ nfc.on("error", (err) => {
   console.log("an error occurred", err);
 });
 
-app.use(cors(corsOptions));
+app.use(
+  cors({
+    origin: "*",
+    methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
+  })
+);
 
 app.use(express.json());
 
-// Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, "../public")));
+// // Serve static files from the 'public' directory
+// app.use(express.static(path.join(__dirname, "../public")));
 
-// Route to serve the main entry point (optional)
-app.get("/", (req, res) => {
-  res.set("Cache-Control", "no-store");
+// // Route to serve the main entry point (optional)
+// app.get("/", (req, res) => {
+//   res.set("Cache-Control", "no-store");
 
-  res.sendFile(path.join(__dirname, "../public", "index.html"));
-});
+//   res.sendFile(path.join(__dirname, "../public", "index.html"));
+// });
 
 app.get("/api/v1/scan-card", (req: Request, res: Response) => {
-  res.set("Cache-Control", "no-store");
-
   if (lastScannedCard) {
     res.send({ status: "success", data: lastScannedCard });
   } else {
