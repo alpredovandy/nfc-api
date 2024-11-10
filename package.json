@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@pokusew/pcsclite": "^0.6.0",
     "@tockawa/nfc-pcsc": "^0.9.3",
     "cors": "^2.8.5",
     "express": "^4.21.1"
