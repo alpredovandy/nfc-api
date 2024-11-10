@@ -54,6 +54,10 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../public", "index.html"));
 });
 
+app.use((req, res) => {
+  res.status(404).send("Route not found");
+});
+
 app.use(
   (
     err: Error,
@@ -67,6 +71,8 @@ app.use(
 );
 
 app.get("/api/v1/scan-card", (req: Request, res: Response) => {
+  console.log("Route /api/v1/scan-card called");
+  console.log("Last scanned card:", lastScannedCard);
   if (lastScannedCard) {
     res.send({ status: "success", data: lastScannedCard });
   } else {
