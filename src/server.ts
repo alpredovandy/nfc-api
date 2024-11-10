@@ -8,6 +8,13 @@ const port = process.env.PORT || 3000;
 
 let lastScannedCard: any = null;
 
+const corsOptions = {
+  origin: "*",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+  optionsSuccessStatus: 204,
+};
+
 const nfc = new PCSC();
 
 nfc.on("reader", (reader) => {
@@ -37,12 +44,7 @@ nfc.on("error", (err) => {
   console.log("an error occurred", err);
 });
 
-app.use(
-  cors({
-    origin: "*",
-    methods: ["GET", "POST", "PUT", "OPTIONS"],
-  })
-);
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
