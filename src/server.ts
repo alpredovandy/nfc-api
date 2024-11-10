@@ -46,16 +46,10 @@ app.use(
 
 app.use(express.json());
 
-app.use(express.static(path.resolve(__dirname, "dist")));
+app.use(express.static(path.join(__dirname, "public")));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../public", "index.html"), (err) => {
-    if (err) {
-      res.status(404).send(err);
-    } else {
-      res.status(500).send(err);
-    }
-  });
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 app.get("/api/v1/scan-card", (req: Request, res: Response) => {
