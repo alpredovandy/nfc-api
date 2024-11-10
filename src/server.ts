@@ -46,14 +46,16 @@ app.use(
 
 app.use(express.json());
 
-// Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, "../public")));
+app.use(express.static(path.resolve(__dirname, "dist")));
 
-// Route to serve the main entry point (optional)
-app.get("/", (req, res) => {
-  res.set("Cache-Control", "no-store");
-
-  res.sendFile(path.join(__dirname, "../public", "index.html"));
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../public", "index.html"), (err) => {
+    if (err) {
+      res.status(404).send(err);
+    } else {
+      res.status(500).send(err);
+    }
+  });
 });
 
 app.get("/api/v1/scan-card", (req: Request, res: Response) => {
