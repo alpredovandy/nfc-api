@@ -46,10 +46,24 @@ app.use(
 
 app.use(express.json());
 
+// Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, "../public")));
 
-app.get("/", (req, res) =>
-  res.sendFile(path.join(__dirname, "../public", "index.html"))
+// Define the main route to serve HTML
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public", "index.html"));
+});
+
+app.use(
+  (
+    err: Error,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    console.error(err.stack);
+    res.status(500).send("Something broke!");
+  }
 );
 
 app.get("/api/v1/scan-card", (req: Request, res: Response) => {
