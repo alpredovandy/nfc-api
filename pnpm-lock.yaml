@@ -709,13 +709,6 @@ packages:
         integrity: sha512-7lf7qcQidTku0Gu3YDPc8DJ1q7OOucfa/BSsIwjuh56VU7katFvuM8hULfkwB3Fns/rsVF7PwPKVw1sl5KQS9w==,
       }
 
-  pcsclite@1.0.1:
-    resolution:
-      {
-        integrity: sha512-KffeR9V+Q0ERHsOp2Ys4K81XEkRSFfn/G6Nbfieq2BPbP90KnMFFClKLgJ/hKmCddxUdpcu3OVVSY+tTy5FXRw==,
-      }
-    engines: { node: ">=4.8.0" }
-
   picomatch@2.3.1:
     resolution:
       {
