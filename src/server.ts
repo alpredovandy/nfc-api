@@ -51,8 +51,6 @@ app.use(express.static(path.join(__dirname, "../public")));
 
 // Route to serve the main entry point (optional)
 app.get("/", (req, res) => {
-  res.set("Cache-Control", "no-store");
-
   res.sendFile(path.join(__dirname, "../public", "index.html"));
 });
 
