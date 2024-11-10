@@ -51,24 +51,9 @@ app.use(express.static(path.join(__dirname, "../public")));
 
 // Define the main route to serve HTML
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public", "index.html"));
+  const filePath = path.join(__dirname, "../public", "index.html");
+  res.send(`${filePath}`);
 });
-
-app.use((req, res) => {
-  res.status(404).send("Route not found");
-});
-
-app.use(
-  (
-    err: Error,
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) => {
-    console.error(err.stack);
-    res.status(500).send("Something broke!");
-  }
-);
 
 app.get("/api/v1/scan-card", (req: Request, res: Response) => {
   console.log("Route /api/v1/scan-card called");
