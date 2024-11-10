@@ -63,13 +63,6 @@ packages:
         integrity: sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ==,
       }
 
- "@tockawa/nfc-pcsc@0.9.3":
-    resolution:
-      {
-        integrity: sha512-AeXGvP/RG73mwsVi8uOyRP9QJIRghvQiay2kEnrMXCQyDFd+dvuvOYWHh4kdqNetwd5+nmgMc/c/qZvA4QZ0rA==,
-      }
-    engines: { node: ">=12.0.0" }
-
   "@tsconfig/node10@1.0.11":
     resolution:
       {
@@ -946,7 +939,7 @@ snapshots:
       "@jridgewell/sourcemap-codec": 1.5.0
 
   "@tockawa/nfc-pcsc@0.9.3": {}
-    
+
   "@tsconfig/node10@1.0.11": {}
 
   "@tsconfig/node12@1.0.11": {}
